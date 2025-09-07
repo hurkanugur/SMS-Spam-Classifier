@@ -1,23 +1,23 @@
 # 📧 SMS Spam Classifier with PyTorch
 
 ## 📖 Overview
-This project predicts whether a given SMS message is **spam or not** using a **logistic regression model** implemented in **PyTorch**.  
+This project predicts whether a given SMS message is **spam or not** using a **feedforward neural network** implemented in **PyTorch**.  
 It covers the full pipeline from data preprocessing to model training, evaluation, and inference on real messages, including:
 
-- 📊 **Logistic Regression Model** implemented with PyTorch  
-- ⚖️ **Binary Cross-Entropy (BCE) Loss** for classification  
-- 🧠 **Adam optimizer** for training  
-- 🔀 **Train/Validation/Test split** for robust evaluation  
-- 📈 **CountVectorizer feature extraction** for converting text to numerical features
+- 🧠 **Neural Network Model** implemented with PyTorch  
+- ⚖️ **Binary Cross-Entropy (BCE) Loss** for binary classification  
+- 🔄 **Adam optimizer** for training  
+- 🔀 **Train/Validation/Test split** with mini-batches for robust evaluation  
+- 📈 **CountVectorizer feature extraction** for converting text messages into numerical features  
+- 💾 **Saving and loading vectorizer** for consistent preprocessing during inference 
 
 ---
 
 ## 🧩 Libraries
 - **PyTorch** – model, training, and inference  
-- **pandas** – data handling & preprocessing  
-- **scikit-learn** – dataset splitting  
-- **matplotlib** – plotting loss curves
-- **pickle** – saving/loading vectorizer and model
+- **pandas** – data handling  
+- **matplotlib** – loss visualization  
+- **pickle** – saving/loading vectorizer and trained model
 
 ---
 
@@ -65,41 +65,50 @@ cd src
 
 ```bash
 data/
-└── SMSSpamCollection           # Raw dataset
+└── SMSSpamCollection               # Raw dataset
 
 model/
-├── spam_model.pth              # Trained model (after training)
-└── vectorizer.pkl              # Fitted CountVectorizer (after training)
+└── sms_spam_classifier.pth         # Trained model (after training)
 
 src/
-├── config.py                   # Configurations (paths, hyperparameters, dataset split)
-├── data_utils.py               # Data loading, preprocessing, feature extraction
-├── model_utils.py              # Model definition and save/load utilities
-├── plot_utils.py               # Loss plotting
-├── predict_spam_messages.py    # Predict spam on new SMS messages
-├── train_model.py              # Model training and evaluation
+├── config.py                       # Paths, hyperparameters, split ratios
+├── dataset.py                      # Data loading & preprocessing
+├── main_train.py                   # Training & model saving
+├── main_inference.py               # Inference pipeline
+├── model.py                        # Neural network definition
+├── visualize.py                    # Training/validation plots
 
-requirements.txt                # Python dependencies
-
+requirements.txt                    # Python dependencies
 ```
+
+---
+
+## 📂 Model Architecture
+
+```bash
+Input → Linear(64) → ReLU
+      → Linear(32) → ReLU
+      → Linear(1) → Sigmoid (Output)
+```
+
 ---
 
 ## 📂 Train the Model
 ```bash
-python train_model.py
+python main_train.py
 ```
 or
 ```bash
-python3 train_model.py
+python3 main_train.py
 ```
 
 ---
 
 ## 📂 Run Predictions on Real Data
 ```bash
-python predict_spam_messages.py
+python main_inference.py
 ```
 or
 ```bash
-python3 predict_spam_messages.py
+python3 main_inference.py
 ```
