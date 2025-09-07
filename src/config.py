@@ -1,28 +1,34 @@
 # -------------------------
 # Paths
 # -------------------------
-MODEL_PATH = "../model/spam_model.pth"
+MODEL_PATH = "../model/sms_spam_classifier.pth"
 VECTORIZER_PATH = "../model/vectorizer.pkl"
-DATA_PATH = "../data/SMSSpamCollection"
+DATASET_CSV_PATH = "../data/SMSSpamCollection"
 
 # -------------------------
-# Training hyperparameters
+# Vocabulary
 # -------------------------
-LEARNING_RATE = 0.01               # Learning rate
-TRAINING_EPOCHS = 50000            # Number of training epochs
-VAL_INTERVAL = 1000                # Interval for validation loss evaluation
-MAX_VOCAB_SIZE = 1000              # Maximum number of words to keep in vocabulary
+VOCABULARY_SIZE = 1000
 
 # -------------------------
-# Data split ratios
+# Training Hyperparameters
 # -------------------------
-SPLIT_DATASET = True               # Set to False to use the same dataset for train/val/test
-SPLIT_RANDOM_STATE = 42            # Seed for reproducible shuffling; set to None for random behavior
-TRAIN_SET_SIZE = 0.7
-VAL_SET_SIZE = 0.15
-TEST_SET_SIZE = 0.15
+LEARNING_RATE = 5e-3
+WEIGHT_DECAY = 1e-6
+BATCH_SIZE = 64
+NUM_EPOCHS = 100
+VAL_INTERVAL = 1
 
 # -------------------------
-# Spam classification threshold
+# Dataset Splits
 # -------------------------
-SPAM_THRESHOLD = 0.25              # Messages with predicted probability above this value are classified as spam
+SPLIT_DATASET = True  # Set False to use the full dataset for train/val/test
+TRAIN_SPLIT_RATIO = 0.7
+VAL_SPLIT_RATIO = 0.15
+TEST_SPLIT_RATIO = 0.15
+SPLIT_RANDOMIZATION_SEED = 42  # Seed (integer) for reproducible dataset splits; set to None for fully random splits
+
+# -------------------------
+# Prediction / Classification
+# -------------------------
+CLASSIFICATION_THRESHOLD = 0.5  # Probability threshold to classify Pass vs Fail (used during inference/evaluation only)
