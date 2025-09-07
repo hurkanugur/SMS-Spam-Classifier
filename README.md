@@ -4,7 +4,7 @@
 This project predicts whether a given SMS message is **spam or not** using a **feedforward neural network** implemented in **PyTorch**.  
 It covers the full pipeline from data preprocessing to model training, evaluation, and inference on real messages, including:
 
-- 🧠 **Neural Network Model** implemented with PyTorch  
+- 🧠 **Neural Network** with multiple hidden layers using **LeakyReLU** activation function and **Dropout**
 - ⚖️ **Binary Cross-Entropy (BCE) Loss** for binary classification  
 - 🔄 **Adam optimizer** for training  
 - 🔀 **Train/Validation/Test split** with mini-batches for robust evaluation  
@@ -86,9 +86,11 @@ requirements.txt                    # Python dependencies
 ## 📂 Model Architecture
 
 ```bash
-Input → Linear(64) → ReLU
-      → Linear(32) → ReLU
-      → Linear(1) → Sigmoid(Output)
+Input → Linear(256) → LeakyReLU → Dropout(0.5)  
+      → Linear(128) → LeakyReLU → Dropout(0.5)  
+      → Linear(64)  → LeakyReLU → Dropout(0.5)  
+      → Linear(32)  → LeakyReLU → Dropout(0.5)  
+      → Linear(1)   → Sigmoid(Output)
 ```
 
 ---

@@ -6,13 +6,23 @@ class SMSSpamClassifier(nn.Module):
     def __init__(self, input_dim, device):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(input_dim, 64),
-            nn.ReLU(),
+            nn.Linear(input_dim, 256),
+            nn.LeakyReLU(),
+            nn.Dropout(0.5),
+
+            nn.Linear(256, 128),
+            nn.LeakyReLU(),
+            nn.Dropout(0.5),
+
+            nn.Linear(128, 64),
+            nn.LeakyReLU(),
+            nn.Dropout(0.5),
 
             nn.Linear(64, 32),
-            nn.ReLU(),
+            nn.LeakyReLU(),
+            nn.Dropout(0.5),
 
-            nn.Linear(32, 1) 
+            nn.Linear(32, 1)
         )
 
         self.net.apply(self.init_weights)

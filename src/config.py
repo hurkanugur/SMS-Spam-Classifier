@@ -13,10 +13,10 @@ VOCABULARY_SIZE = 1000
 # -------------------------
 # Training Hyperparameters
 # -------------------------
-LEARNING_RATE = 5e-3
-WEIGHT_DECAY = 1e-6
-BATCH_SIZE = 64
-NUM_EPOCHS = 100
+LEARNING_RATE = 5e-5
+WEIGHT_DECAY = 1e-2
+BATCH_SIZE = 256
+NUM_EPOCHS = 250
 VAL_INTERVAL = 1
 
 # -------------------------
