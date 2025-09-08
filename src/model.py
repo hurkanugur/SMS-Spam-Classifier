@@ -7,19 +7,19 @@ class SMSSpamClassifier(nn.Module):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(input_dim, 256),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(config.LEAKY_RELU_SLOPE),
             nn.Dropout(0.5),
 
             nn.Linear(256, 128),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(config.LEAKY_RELU_SLOPE),
             nn.Dropout(0.5),
 
             nn.Linear(128, 64),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(config.LEAKY_RELU_SLOPE),
             nn.Dropout(0.5),
 
             nn.Linear(64, 32),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(config.LEAKY_RELU_SLOPE),
             nn.Dropout(0.5),
 
             nn.Linear(32, 1)
@@ -34,7 +34,7 @@ class SMSSpamClassifier(nn.Module):
     
     def init_weights(self, m):
         if isinstance(m, nn.Linear):
-            nn.init.kaiming_uniform_(m.weight, a=0.01, nonlinearity='leaky_relu')
+            nn.init.kaiming_uniform_(m.weight, a=config.LEAKY_RELU_SLOPE, nonlinearity='leaky_relu')
             nn.init.zeros_(m.bias)
 
     def save(self):
