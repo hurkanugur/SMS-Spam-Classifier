@@ -34,7 +34,7 @@ class SMSSpamClassifier(nn.Module):
     
     def init_weights(self, m):
         if isinstance(m, nn.Linear):
-            nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
+            nn.init.kaiming_uniform_(m.weight, a=0.01, nonlinearity='leaky_relu')
             nn.init.zeros_(m.bias)
 
     def save(self):
