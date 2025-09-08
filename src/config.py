@@ -13,6 +13,7 @@ VOCABULARY_SIZE = 1000
 # -------------------------
 # Training Hyperparameters
 # -------------------------
+LEAKY_RELU_SLOPE = 0.01
 LEARNING_RATE = 5e-5
 WEIGHT_DECAY = 1e-2
 BATCH_SIZE = 256

@@ -96,7 +96,7 @@ def main():
     train_loader, val_loader, test_loader = dataset.prepare_data_for_training()
 
     # Initialize model, optimizer, loss
-    input_dim = dataset.get_input_dim(train_loader)
+    input_dim = dataset.get_flattened_input_size(train_loader)
     model = SMSSpamClassifier(input_dim=input_dim, device=device)
     optimizer = torch.optim.Adam(model.parameters(), lr=config.LEARNING_RATE, weight_decay=config.WEIGHT_DECAY)
     loss_fn = nn.BCEWithLogitsLoss()

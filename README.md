@@ -86,10 +86,10 @@ requirements.txt                    # Python dependencies
 ## 📂 Model Architecture
 
 ```bash
-Input → Linear(256) → LeakyReLU → Dropout(0.5)  
-      → Linear(128) → LeakyReLU → Dropout(0.5)  
-      → Linear(64)  → LeakyReLU → Dropout(0.5)  
-      → Linear(32)  → LeakyReLU → Dropout(0.5)  
+Input → Linear(256) → LeakyReLU(0.01) → Dropout(0.5)  
+      → Linear(128) → LeakyReLU(0.01) → Dropout(0.5)  
+      → Linear(64)  → LeakyReLU(0.01) → Dropout(0.5)  
+      → Linear(32)  → LeakyReLU(0.01) → Dropout(0.5)  
       → Linear(1)   → Sigmoid(Output)
 ```
 

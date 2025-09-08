@@ -18,6 +18,7 @@ class SMSDataset(Dataset):
         self.vectorizer = CountVectorizer(max_features=config.VOCABULARY_SIZE)
 
     # ----------------- PUBLIC METHODS -----------------
+    
     def prepare_data_for_training(self):
         """Load data, split train/val/test, fit scaler, normalize features, and return DataLoaders."""
         df = self._load_csv()
@@ -38,10 +39,12 @@ class SMSDataset(Dataset):
 
         return X
 
-    def get_input_dim(self, data_loader):
-        """Return number of input features dynamically."""
+    def get_flattened_input_size(self, data_loader):
+        """Return number of input features per sample after flattening (for MLPs)."""
         sample_X, _ = next(iter(data_loader))
-        return sample_X.shape[1]
+        input_dim = sample_X[0].numel()
+        print(f"• Input dimension: {input_dim}")
+        return input_dim
 
     def save_vectorizer(self):
         """Save the vectorizer for inference."""
