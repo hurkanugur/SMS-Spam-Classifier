@@ -3,14 +3,16 @@ import pandas as pd
 import torch
 import config
 from dataset import SMSDataset
+from device_manager import DeviceManager
 from model import SMSSpamClassifier
 
 def main():
     # -------------------------
-    # Select CPU or GPU
+    # Select CUDA (GPU) / MPS (Mac) / CPU
     # -------------------------
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Selected device: {device}")
+    print("-------------------------------------")
+    device_manager = DeviceManager()
+    device = device_manager.device
 
     # -------------------------
     # Load dataset and vectorizer
@@ -69,6 +71,12 @@ def main():
         label = 'Spam' if p.item() == 1 else 'Ham'
         print(f"SMS {i+1}: Predicted: {label}, Probability: {prob.item():.2f}")
 
+    # -------------------------
+    # Release the memory
+    # -------------------------
+    print("-------------------------------------")
+    device_manager.release_memory()
+    print("-------------------------------------")
 
 if __name__ == "__main__":
     main()
