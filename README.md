@@ -1,8 +1,7 @@
 # 📧 SMS Spam Classifier with PyTorch
 
 ## 📖 Overview
-This project predicts whether a given SMS message is **spam or not** using a **feedforward neural network** implemented in **PyTorch**.  
-It covers the full pipeline from data preprocessing to model training, evaluation, and inference on real messages, including:
+This project predicts whether a given SMS message is **spam or not** using a **feedforward neural network** implemented in **PyTorch**.
 
 - 🧠 **Neural Network** with multiple hidden layers using **LeakyReLU** activation function and **Dropout**
 - ⚖️ **Binary Cross-Entropy (BCE) Loss** for binary classification  
@@ -10,6 +9,15 @@ It covers the full pipeline from data preprocessing to model training, evaluatio
 - 🔀 **Train/Validation/Test split** with mini-batches for robust evaluation  
 - 📈 **CountVectorizer feature extraction** for converting text messages into numerical features  
 - 💾 **Saving and loading vectorizer** for consistent preprocessing during inference 
+- 🎨 **Interactive Gradio Interface** for real-time image classification visualization
+
+---
+
+## 🖼️ Application Screenshot
+
+Below is a preview of the **Gradio Interface** used for real-time tire classification:
+
+![Application Screenshot](assets/app_screenshot.png)
 
 ---
 
@@ -18,6 +26,7 @@ It covers the full pipeline from data preprocessing to model training, evaluatio
 - **pandas** – data handling  
 - **matplotlib** – loss visualization  
 - **pickle** – saving/loading vectorizer and trained model
+- **Gradio** — interactive web interface for real-time model demos 
 
 ---
 
@@ -45,11 +54,6 @@ cd SMS-Spam-Classifier
 pip install -r requirements.txt
 ```
 
-- Navigate to the `SMS-Spam-Classifier/src` directory
-```bash
-cd src
-```
-
 ---
 
 ## 🔧 Setup Python Environment in VS Code
@@ -64,20 +68,28 @@ cd src
 ## 📂 Project Structure
 
 ```bash
+assets/
+└── app_screenshot.png              # Screenshot of the application
+
 data/
 └── SMSSpamCollection               # Raw dataset
 
 model/
-└── sms_spam_classifier.pth         # Trained model (after training)
+├── sms_spam_classifier.pth         # Trained model (after training)
+└── vectorizer.pkl                  # Saved CountVectorizer for text preprocessing
 
 src/
 ├── config.py                       # Paths, hyperparameters, split ratios
 ├── dataset.py                      # Data loading & preprocessing
 ├── device_manager.py               # Selects and manages compute device
-├── main_train.py                   # Training & model saving
-├── main_inference.py               # Inference pipeline
+├── train.py                        # Training pipeline
+├── inference.py                    # Inference pipeline
 ├── model.py                        # Neural network definition
-├── visualize.py                    # Training/validation plots
+└── visualize.py                    # Training/validation plots
+
+main/
+├── main_train.py                   # Entry point for training
+└── main_inference.py               # Entry point for inference
 
 requirements.txt                    # Python dependencies
 ```
@@ -97,21 +109,33 @@ Input → Linear(256) → LeakyReLU(0.01) → Dropout(0.5)
 ---
 
 ## 📂 Train the Model
+Navigate to the project directory:
 ```bash
-python main_train.py
+cd SMS-Spam-Classifier
+```
+
+Run the training script:
+```bash
+python -m main.main_train
 ```
 or
 ```bash
-python3 main_train.py
+python3 -m main.main_train
 ```
 
 ---
 
-## 📂 Run Predictions on Real Data
+## 📂 Run Inference / Make Predictions
+Navigate to the project directory:
 ```bash
-python main_inference.py
+cd SMS-Spam-Classifier
+```
+
+Run the app:
+```bash
+python -m main.main_inference
 ```
 or
 ```bash
-python3 main_inference.py
+python3 -m main.main_inference
 ```

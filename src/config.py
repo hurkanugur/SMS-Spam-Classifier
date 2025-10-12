@@ -1,9 +1,9 @@
 # -------------------------
 # Paths
 # -------------------------
-MODEL_PATH = "../model/sms_spam_classifier.pth"
-VECTORIZER_PATH = "../model/vectorizer.pkl"
-DATASET_CSV_PATH = "../data/SMSSpamCollection"
+MODEL_PATH = "model/sms_spam_classifier.pth"
+VECTORIZER_PATH = "model/vectorizer.pkl"
+DATASET_CSV_PATH = "data/SMSSpamCollection"
 
 # -------------------------
 # Vocabulary

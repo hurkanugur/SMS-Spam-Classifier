@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import config
+from src import config
 
 class SMSSpamClassifier(nn.Module):
     def __init__(self, input_dim, device):

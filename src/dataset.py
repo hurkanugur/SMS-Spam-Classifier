@@ -5,7 +5,7 @@ from torch.utils.data import Dataset, TensorDataset, DataLoader, random_split
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import CountVectorizer
-import config
+from src import config
 
 
 class SMSDataset(Dataset):
@@ -30,19 +30,20 @@ class SMSDataset(Dataset):
 
         return train_loader, val_loader, test_loader
 
-    def prepare_data_for_inference(self, df: pd.DataFrame):
+    def prepare_data_for_inference(self, text: str):
         """Prepare the data for inference."""
         X = torch.tensor(
-            self.vectorizer.transform(df["message"]).todense(),
+            self.vectorizer.transform([text]).todense(),
             dtype=torch.float32
         )
-
         return X
 
-    def get_flattened_input_size(self, data_loader):
-        """Return number of input features per sample after flattening (for MLPs)."""
-        sample_X, _ = next(iter(data_loader))
-        input_dim = sample_X[0].numel()
+    def get_input_dim(self):
+        """Return the fixed number of input features for the model."""
+        # Use a dummy SMS just to transform into vector
+        sample_text = ["Dummy SMS"]
+        vector = self.vectorizer.transform(sample_text).toarray()
+        input_dim = vector.shape[1]
         print(f"• Input dimension: {input_dim}")
         return input_dim
 
